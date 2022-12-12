@@ -1,6 +1,5 @@
-let nombre = "perro";
 let cont=0, rep=0, letraRep = 0;
-let palabra;
+let palabra, inversa;
 
 function buscaRepetidos(palabra){
     rep=0;
@@ -12,11 +11,12 @@ function buscaRepetidos(palabra){
     for (let i=0; i<palabra.length; i++){
         //console.log(i)
         //console.log(arreglo[i]);
+        rep=1;
         for (let j=0; j<palabra.length; j++){
             //console.log(j)
             if ((palabra.charAt(i)==palabra.charAt(j)) && (i!=j&&i<j)){
                 rep++;
-                console.log(rep);
+                //console.log(rep);
             }
         }
         if (rep>cont) {
@@ -24,10 +24,27 @@ function buscaRepetidos(palabra){
             letraRep = palabra.charAt(i);
         }
     }
-    if (rep==0){
-        return `no hay letras repetidas`;
-    }else{
-        return letraRep;
+    return letraRep;
+}
+
+function devuelveInverso(palabra){
+    let invertida = "";
+    for (let i = palabra.length; i >=0; i--) {
+        invertida += palabra.charAt(i);
+    }
+    console.log(invertida);
+    return invertida;
+}
+
+function esPalindromo(palabra){
+    let temp = palabra.split(" ").join("");
+    let invertida = devuelveInverso(palabra);
+    invertida=invertida.split(" ").join("");
+
+    if (invertida==temp){
+        return `<br>Es un palíndromo`;
+    }else {
+        return `<br>no es un palíndromo`;
     }
 }
 
@@ -37,8 +54,12 @@ btnRevisaPalabra.addEventListener("click", function (event){
     let palabra = document.getElementById("palabra").value;
     console.log(palabra)
     let nueva = palabra.toUpperCase();
-    let resultado = document.getElementById("alerta");
-    resultado.innerHTML = `La letra mas repetida es ${buscaRepetidos(nueva)} y se aparece ${rep+1} veces`;
+    let res = document.getElementById("alerta");
+    res.innerHTML += `<br>La letra mas repetida es ${buscaRepetidos(nueva)} y se aparece ${cont} veces`;
+    let res2 = document.getElementById("alerta2");
+    res2.innerHTML += `<br>La palabra al revés sería ${devuelveInverso(palabra)}`;
+    let res3 = document.getElementById("alerta3");
+    res3.innerHTML += esPalindromo(palabra);
 
     document.getElementById("palabra").focus();
     document.getElementById("palabra").select();
