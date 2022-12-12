@@ -37,7 +37,7 @@ function devuelveInverso(palabra){
 }
 
 function esPalindromo(palabra){
-    let temp = palabra.split(" ").join("");
+    let temp = palabra.replaceAll(" ", "");
     let invertida = devuelveInverso(palabra);
     invertida=invertida.split(" ").join("");
 
